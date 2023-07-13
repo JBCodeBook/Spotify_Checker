@@ -53,7 +53,7 @@ def main(config):
     redirect_uri = config['spotify']['Redirect_URI']
     username = config['lemmy']['username']
     password = config['lemmy']['password']
-    database_path = os.path.expanduser('~/Dev/spotify/Spotify.db')
+    database_path = os.path.expanduser('./Spotify.db')
 
     episode_manager = SpotifyEpisodeManager(
         database_path=database_path,
