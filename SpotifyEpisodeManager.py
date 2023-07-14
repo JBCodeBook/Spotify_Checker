@@ -38,6 +38,7 @@ class SpotifyEpisodeManager:
     def search_show_episodes(self, podcast_name):
         print(self.sp.auth_manager)
         results = self.sp.search(q=podcast_name, type='show')
+        print("getting stuck here")
         show = results['shows']['items'][0]
         show_id = show['id']
 
