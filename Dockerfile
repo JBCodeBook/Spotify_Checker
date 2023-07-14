@@ -1,17 +1,15 @@
-FROM python:3.10
-
-# Set the working directory in the container
+# Stage 1: Build stage
+FROM python:3.10 AS build
 WORKDIR /app
-
-# Copy the requirements file to the working directory
 COPY requirements.txt .
-
-# Install the Python dependencies and SQLite
-RUN apt-get update && apt-get install -y sqlite3 && \
-    pip install --no-cache-dir -r requirements.txt
-
-# Copy the entire project to the working directory
+RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
-# Set the command to run when the container starts
+# Stage 2: Runtime stage
+FROM python:3.10
+WORKDIR /app
+COPY --from=build /app /app
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends sqlite3 && \
+    rm -rf /var/lib/apt/lists/*
 CMD ["python", "main.py"]
