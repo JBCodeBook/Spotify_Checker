@@ -1,4 +1,4 @@
-FROM arm32v7/debian
+FROM linux/arm/v7
 
 # Use an official Python runtime as the base image
 FROM python:3.10
@@ -13,7 +13,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install SQLite system package
-FROM nouchka/sqlite3
+FROM keinos/sqlite3
 
 # Copy the entire project to the working directory
 COPY . .
