@@ -13,7 +13,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install SQLite system package
-FROM sqlite:latest
+FROM nouchka/sqlite3
 
 # Copy the entire project to the working directory
 COPY . .
