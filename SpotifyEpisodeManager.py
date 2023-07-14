@@ -28,11 +28,15 @@ class SpotifyEpisodeManager:
                     scope=scope
                 )
             )
+            print(client_id)
+            print(client_secret)
+            print(redirect_uri)
             return sp
         except KeyError:
             raise ValueError("Invalid or missing Spotify credentials in the configuration")
 
     def search_show_episodes(self, podcast_name):
+        print(self.sp.auth_manager)
         results = self.sp.search(q=podcast_name, type='show')
         show = results['shows']['items'][0]
         show_id = show['id']

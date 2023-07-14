@@ -66,6 +66,7 @@ def main(config):
 
     podcast_name = "Joe Rogan Experience"
     episodes = episode_manager.search_show_episodes(podcast_name)
+    print("Searching for ", episodes)
     process_episodes(episode_manager, episodes, username, password)
 
     # Close the connection
