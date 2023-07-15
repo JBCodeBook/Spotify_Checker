@@ -28,9 +28,7 @@ class SpotifyEpisodeManager:
                     scope=scope
                 )
             )
-            print(client_id)
-            print(client_secret)
-            print(redirect_uri)
+
             return sp
         except KeyError:
             raise ValueError("Invalid or missing Spotify credentials in the configuration")
