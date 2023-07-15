@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import json
 from logger_config import logger
 import os
@@ -74,5 +76,9 @@ def main(config):
 
 
 if __name__ == "__main__":
+    # Activate the virtual environment
+    activate_this = '/home/shredder3/Dev/Spotify_Checker/spotenv/bin/activate'
+    exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+
     config = load_config('config.json')
     main(config)
