@@ -61,7 +61,7 @@ def main(config):
         database_path=database_path,
         client_id=client_id,
         client_secret=client_secret,
-        redirect_uri=redirect_uri
+        # redirect_uri=redirect_uri
     )
 
     conn, cursor = episode_manager.connect_to_database(database_path)

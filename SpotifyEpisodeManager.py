@@ -1,12 +1,12 @@
 import spotipy
-from spotipy.oauth2 import SpotifyOAuth
 import sqlite3
+from spotipy.oauth2 import SpotifyClientCredentials
 from logger_config import logger
 
 
 class SpotifyEpisodeManager:
-    def __init__(self, database_path, client_id, client_secret, redirect_uri):
-        self.sp = self.authenticate_spotify(client_id, client_secret, redirect_uri)
+    def __init__(self, client_id, client_secret, database_path):
+        self.sp = self.authenticate_spotify(client_id, client_secret)
         self.conn, self.cursor = self.connect_to_database(database_path)
         self.logger = logger
 
@@ -14,27 +14,18 @@ class SpotifyEpisodeManager:
         conn = sqlite3.connect(database_path)
         cursor = conn.cursor()
         return conn, cursor
-
-    def authenticate_spotify(self, client_id, client_secret, redirect_uri):
-
-        scope = "user-library-read"
-
+    def authenticate_spotify(self, client_id, client_secret):
         try:
-            sp = spotipy.Spotify(
-                auth_manager=SpotifyOAuth(
-                    client_id=client_id,
-                    client_secret=client_secret,
-                    redirect_uri=redirect_uri,
-                    scope=scope
-                )
+            client_credentials_manager = SpotifyClientCredentials(
+                client_id=client_id,
+                client_secret=client_secret
             )
-
+            sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
             return sp
         except KeyError:
             raise ValueError("Invalid or missing Spotify credentials in the configuration")
 
     def search_show_episodes(self, podcast_name):
-        print(self.sp.auth_manager)
         results = self.sp.search(q=podcast_name, type='show')
         show = results['shows']['items'][0]
         show_id = show['id']
