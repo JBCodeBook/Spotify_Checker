@@ -65,10 +65,8 @@ def main(config):
     )
 
     conn, cursor = episode_manager.connect_to_database(database_path)
-    print(episode_manager.sp)
     podcast_name = "Joe Rogan Experience"
     episodes = episode_manager.search_show_episodes(podcast_name)
-    print("Searching for ", episodes)
     process_episodes(episode_manager, episodes, username, password)
 
     # Close the connection
