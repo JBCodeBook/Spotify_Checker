@@ -53,15 +53,14 @@ def main(config):
     client_id = config['spotify']['client_id']
     client_secret = config['spotify']['client_secret']
     redirect_uri = config['spotify']['Redirect_URI']
-    username = config['lemmy']['username']
-    password = config['lemmy']['password']
+    username = config['lemmy_user2']['username']
+    password = config['lemmy_user2']['password']
     database_path = os.path.expanduser('./Spotify.db')
 
     episode_manager = SpotifyEpisodeManager(
         database_path=database_path,
         client_id=client_id,
         client_secret=client_secret,
-        # redirect_uri=redirect_uri
     )
 
     conn, cursor = episode_manager.connect_to_database(database_path)

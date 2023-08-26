@@ -26,11 +26,11 @@ class SpotifyEpisodeManager:
             raise ValueError("Invalid or missing Spotify credentials in the configuration")
 
     def search_show_episodes(self, podcast_name):
-        results = self.sp.search(q=podcast_name, type='show')
+        results = self.sp.search(q=podcast_name, market='US', type='show')
         show = results['shows']['items'][0]
         show_id = show['id']
 
-        episodes = self.sp.show_episodes(show_id, limit=1, offset=0)
+        episodes = self.sp.show_episodes(show_id=show_id, market='US', limit=1, offset=0)
         return episodes
 
     def check_entry_exists(self, episode_id):
